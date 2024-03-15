@@ -28,6 +28,8 @@ const config = {
           100: "#F0F2FE",
           50: "#FFFEF9",
         },
+        light: "#fafafa",
+        dark: "#222222",
       },
       transitionProperty: {
         opacity: "opacity",
