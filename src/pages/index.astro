@@ -1,0 +1,19 @@
+---
+import Hero from "../components/sections/Hero.svelte";
+import Layout from "../layouts/Layout.astro";
+import Projects from "../components/sections/Projects.astro";
+import About from "../components/sections/About.astro";
+import Contact from "../components/sections/Contact.svelte";
+import Spacer from "../components/sections/Spacer.astro";
+
+const currentPagePath = Astro.url.pathname;
+
+---
+
+<Layout title="Nathaniel's Portfolio" navStyle="" currentPagePath={currentPagePath}>
+	<Hero client:load/>
+	<Projects />
+	<Spacer />
+	<About />
+	<Contact client:load/>
+</Layout>

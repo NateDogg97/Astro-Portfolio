@@ -1,0 +1,29 @@
+---
+import ProjectPage from "../components/layouts/ProjectPage.astro";
+import image1 from "../assets/bundlebuilder1.png";
+import image2 from "../assets/bundlebuilder2.webp";
+import image3 from "../assets/bundlebuilder3.webp";
+import image4 from "../assets/bundlebuilder4.webp";
+
+const currentPagePath = Astro.url.pathname;
+
+const title = "Premium Feature: Bundle Builder";
+const projectType = "Ecommerce";
+const href = "";
+const summary = "The Bundle Builder stands as my crowning achievement in software development, showcasing an unparalleled blend of innovation, user experience design, and technical prowess. Utilizing cutting-edge technologies like Svelte, Astro, and sophisticated data structures, alongside robust cloud management on Digital Ocean, this premium feature revolutionizes how users interact with ERS by enabling the creation of visually arranged item bundles. This project symbolizes a significant leap forward from its predecessor, offering a seamless and engaging interface for users to craft personalized item scenes."
+const buttonStyle = "bg-witching-hour";
+
+const header1 = "Development Process";
+const header2 = "Challenges Faced";
+const header3 = "Conclusion and Impact";
+const paragraph1 = "The Bundle Builder was conceived to address the limitations of the previous 'Packages' feature by offering a visually intuitive and user-friendly interface for creating item bundles. This feature integrates advanced search functionality, leveraging public APIs and a NoSQL database to manage item data reactively. The Svelte framework facilitates a dynamic user experience, allowing items to be manipulated on a canvas where they can be resized, moved, and layered to create a cohesive scene or package.";
+const paragraph2 = "Embarking on the development of the Bundle Builder presented a series of formidable challenges, from developing a seamless general search functionality to managing complex data structures for real-time user interaction. The drag-and-drop functionality posed the most significant challenge, requiring intricate handling of pointer and click events, as well as managing the reactive states of data with Svelte’s derived stores. Achieving a balance between functionality, user experience, and permissions-based data access demanded not only technical skill but also a deep understanding of user needs and expectations.";
+const paragraph3 = "The Bundle Builder represents a meaningful step forward, born from a commitment to improvement and a desire to innovate. It seeks to remedy previous limitations by providing users with an intuitive and engaging way to create item bundles. As a project I hold in high regard, it reflects a milestone for ERS and a personal point of growth. It's a reminder of the potential that lies at the intersection of passion and technology.";
+const tooltip = "This code base for this project belongs to ERS.";
+const linkButton = "View Demo";
+
+const skills: string[] = ["JavaScript", "Svelte", "Astro", "Data Structures", "Digital Ocean"];
+
+---
+
+<ProjectPage {image1} {image2} {image3} {image4} {currentPagePath} {title} {projectType} {href} {summary} {buttonStyle} {header1} {header2} {header3} {paragraph1} {paragraph2} {paragraph3} {skills} {tooltip} {linkButton} />

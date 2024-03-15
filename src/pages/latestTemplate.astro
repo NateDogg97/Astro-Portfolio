@@ -1,0 +1,27 @@
+---
+import ProjectPage from "../components/layouts/ProjectPage.astro";
+import image1 from "../assets/luxurytemplate1.webp";
+import image2 from "../assets/luxurytemplate2.webp";
+import image3 from "../assets/luxurytemplate3.webp";
+import image4 from "../assets/luxurytemplate4.webp";
+
+const currentPagePath = Astro.url.pathname;
+
+const title = "Luxury Tent Rentals Template";
+const projectType = "Web Design";
+const href = "https://defaultersluxurytemplate1.ourers.com/";
+const summary = "The Luxury Tent Rentals Template revolutionizes the website design offerings of ERS, catering to the upscale tent and event rentals market. Engineered with HTML, CSS, and Vanilla JavaScript, it provides a highly customizable and responsive design that surpasses previous ERS templates in both user experience and aesthetics. Emphasizing a modern user interface and a sophisticated design, the template stands out for its ability to be tailored to specific branding and content needs, marking a significant advancement in ERS's web development endeavors."
+const buttonStyle = "bg-dark-night";
+
+const header1 = "Development Process";
+const header2 = "Challenges Faced";
+const header3 = "Conclusion and Impact";
+const paragraph1 = "The template was meticulously crafted to support customization in text, images, meta-data, and web sections, similar to the flexibility offered by Wordpress but built on company-specific templating software. The development required close collaboration with the Graphics Design team for the layout, then bringing that vision to life using fundamental web technologies while incorporating company branding throughout the design.";
+const paragraph2 = "The primary challenge was the solo development effort, starting from a basic layout to creating a fully functional, aesthetically pleasing template. The use of only HTML, CSS, and Vanilla JavaScript demanded innovative solutions for state management and the development of mini JavaScript libraries to enhance functionality without compromising page speed. This process was intricate and time-consuming, demanding a high level of creativity and technical proficiency.";
+const paragraph3 = "The Luxury Tent Rentals Template represents a significant leap forward for ERS, opening a new business vertical and setting a new standard in template design. Its introduction has not only satisfied a market need but also showcased the potential for high-quality, customizable templates within the company's offering. This project underscores the importance of innovative web development in enhancing user experience and expanding business capabilities.";
+const linkButton = "See it Live";
+
+const skills: string[] = ["HTML", "CSS", "JavaScript", "Web Design", "Company Branding"];
+---
+
+<ProjectPage {linkButton} {image1} {image2} {image3} {image4} {currentPagePath} {title} {projectType} {href} {summary} {buttonStyle} {header1} {header2} {header3} {paragraph1} {paragraph2} {paragraph3} {skills}/>

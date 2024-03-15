@@ -1,0 +1,48 @@
+---
+import { Image } from 'astro:assets';
+import desktopImg from "../../assets/about_me_desktop.png";
+import mobileImg from "../../assets/about_me_mobile.png";
+---
+
+<div id="about_me" class="relative min-h-screen w-full py-16 flex flex-col justify-center bg-radient-ellipse-c from-slate-900 to-neutrals-900 after:bg-radient-ellipse-b after:from-slate-900 after:to-75%">
+
+    <div class="container mx-auto px-6 md:px-12 lg:px-24">
+      <div class="flex flex-wrap">
+        <div class="w-full md:w-1/2 mb-4 md:mb-0 md:pr-8">
+            <Image src={desktopImg} alt="Nathaniel" class="hidden md:block w-full h-auto rounded" />
+            <Image src={mobileImg} alt="Nathaniel" class="block md:hidden w-full h-auto rounded" />
+        </div>
+        <div class="w-full md:w-1/2 px-0 md:pl-4 flex flex-col justify-center text-white">
+          <h2 class="text-4xl font-bold mb-4 font-montserrat">Howdy! <br> I'm Nathaniel,</h1>
+          <div class="mb-6">
+            <p class="text-base mb-4 ">
+              a front-end developer who thrives on crafting innovative web solutions. My journey began with the MERN stack, yet I've found a special affinity for the front end, especially JavaScript, and have dabbled in Python, TypeScript, and PHP. I'm skilled in React but have a preference for Svelte for its state management ease. My experience includes working with Node, Express.js, and NoSQL databases to build and deploy comprehensive websites from scratch.
+
+              At ERS, I've developed premium features, new templates, and contributed to integrating modern technologies for greater creative freedom. The hybrid startup-corporate culture here encourages cross-functional collaboration to achieve outstanding customer satisfaction.
+              
+              I believe in making a difference, whether by strengthening connections or bringing new ideas to life through code. Let's collaborate to make something remarkable.
+            </p> 
+          </div>
+          <a download href="../../../public/nathaniel-mays-resume.pdf" class="button bg-radient-ellipse-c from-purple-600 via-purple-800 to-purple-900 [background-size:100%;] hover:[background-size:200%;] focus:[background-size:200%;] text-white font-bold font-montserrat py-2 px-4 rounded m-auto md:mx-0 w-fit transition-[background-size] duration-500">
+            Download my resume
+          </a>
+        </div>
+      </div>
+    </div>
+</div>
+<style>
+  #about_me {
+    position: relative;
+    height: 100%;
+    border-image: linear-gradient(to right, transparent 5%, rgb(255,255,255, 0.4), transparent 95%) 1 / 1px;
+  }
+  #about_me::after {
+    content: '';
+    position: absolute;
+    pointer-events: none;
+    width: 100%;
+    height: 50px;
+    z-index: 10;
+    bottom: 1px;
+  }
+</style>

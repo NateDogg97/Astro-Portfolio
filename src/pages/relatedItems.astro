@@ -1,0 +1,28 @@
+---
+import ProjectPage from "../components/layouts/ProjectPage.astro";
+import image1 from "../assets/relateditems1.webp";
+import image2 from "../assets/relateditems2.webp";
+import image3 from "../assets/relateditems3.webp";
+import image4 from "../assets/relateditems4.webp";
+
+const currentPagePath = Astro.url.pathname;
+
+const title = "Discovery with Related Items";
+const projectType = "Ecommerce";
+const href = "https://nathaniel-mays.ourers.com/items/22ft_giant_slide_(ers_demo_item)/";
+const summary = 'The Related Items feature stands as a testament to the power of focused, problem-solving software development. This ERS Premium feature enriches e-commerce item pages with a "You Might Also Love" section, driven by user-friendly technology to enhance customer exploration and purchase inclination. Developed with technologies like Svelte, Astro, and supported by Digital Ocean for cloud management, Related Items shines brightly in its effectiveness and direct impact on revenue through improved user experience and engagement.'
+const buttonStyle = "bg-atlas";
+
+const header1 = "Purpose and Importance";
+const header2 = "Development Journey";
+const header3 = "Challenges and Solutions";
+const paragraph1 = "Developed in my spare time, Related Items was born out of a keen observation of customer needs and a proactive approach to address them. This feature directly responds to the popular demand for a seamless shopping experience, encouraging users to discover and purchase additional items. It leverages a sophisticated yet straightforward interface to connect customers with relevant products, significantly enhancing the potential for increased sales and customer satisfaction.";
+const paragraph2 = "Embarking on the development of Related Items was an exciting adventure, allowing me to apply my skills in Svelte and experiment with Astro, alongside implementing efficient data structures. The project was an opportunity to showcase technical capability within a simpler scope, focusing on solving a specific problem rather than complex functionality. It was a project I fully owned from conception to execution, reflecting my ability to identify, design, and implement meaningful enhancements to the user experience.";
+const paragraph3 = "While the technical challenges of this project did not reach the heights of complexity seen in previous endeavors, they provided valuable learning opportunities. Transitioning from React to Svelte presented an enjoyable challenge, redefining my approach to building web applications. The most significant test lay in ensuring the smooth, non-disruptive presentation of data on the item pages, a goal achieved through meticulous development and a focus on the nuances of user interaction. This careful attention to detail ensured that the Related Items feature not only functioned well but also enriched the shopping experience with elegance and intuitiveness.";
+const linkButton = "See it Live";
+
+const skills: string[] = ["JavaScript", "Svelte", "Astro", "Data Structures", "Digital Ocean"];
+---
+
+<ProjectPage {linkButton} {image1} {image2} {image3} {image4} {currentPagePath} {title} {projectType} {href} {summary} {buttonStyle} {header1} {header2} {header3} {paragraph1} {paragraph2} {paragraph3} {skills}/>
+

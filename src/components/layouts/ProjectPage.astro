@@ -1,0 +1,134 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import ProjectHero from "../../components/sections/ProjectHero.astro";
+import ProjectSkills from "../../components/sections/ProjectSkills.astro";
+import Spacer from "../../components/sections/Spacer.astro";
+import TooltipButton from "../ui/TooltipButton.svelte";
+import { Image } from 'astro:assets';
+
+interface Props {
+    title: string;
+    buttonStyle: string;
+    currentPagePath: string;
+    projectType: string;
+    href: string;
+    summary: string;
+    skills: string[];
+    image1: ImageMetadata;
+    image2: ImageMetadata;
+    image3: ImageMetadata;
+    image4: ImageMetadata;
+    header1: string;
+    header2: string;
+    header3: string;
+    paragraph1: string;
+    paragraph2: string;
+    paragraph3: string;
+    tooltip?: string;
+    linkButton?: string;
+}
+
+const { projectType, image1, image2, image3, image4, header1, header2, header3, paragraph1, paragraph2, paragraph3, href, title, summary, buttonStyle, currentPagePath, skills, tooltip, linkButton } = Astro.props as Props;
+---
+
+
+<Layout title={title} navStyle={buttonStyle} currentPagePath={currentPagePath}>
+    <div class="stars-bg fixed h-full w-full bg-[url('/stars-bg.svg')] inset"></div>
+    <div class="w-full bg-neutrals-900 py-8">
+        <div class="h-16"></div>
+        <div class="container mx-auto px-6 xl:px-24 pb-8">
+            <ProjectHero {projectType} image={image1} {href} {title} {summary} {buttonStyle}/>
+        </div>
+    </div>
+    <Spacer />
+    <div class="w-full bg-neutrals-900 pt-16">
+        <div class="container mx-auto px-6 xl:px-24 pt-8">
+            <div class="relative text-light w-full flex flex-col lg:flex-row items-stretch lg:items-center justify-center lg:justify-between pb-24 xl:pb-32">
+                <Image 
+                    src={image2}
+                    alt={title} 
+                    width="600"
+                    height="600"
+                    class="w-full rounded lg:w-1/2 object-cover mb-8 lg:mb-0 lg:mr-16 bg-transparent"
+                    loading="lazy" 
+                />
+                <div class="flex flex-col items-start max-w-fit lg:w-1/2 mx-0">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-8">{header1}
+                    </h2>
+                    <p class="mb-6 text-lg">{paragraph1}
+                    </p>
+                </div>
+            </div>
+            <div class="relative text-light w-full flex flex-col lg:flex-row items-stretch lg:items-center justify-center lg:justify-between pb-24 xl:pb-32">
+                <Image 
+                    src={image3}
+                    alt={title} 
+                    width="600"
+                    height="600"
+                    class="w-full rounded lg:w-1/2 object-cover mb-8 lg:mb-0 lg:mr-16 bg-transparent"
+                    loading="lazy"
+                />
+                <div class="flex flex-col items-start max-w-fit lg:w-1/2 mx-0">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-8">{header2}
+                    </h2>
+                    <p class="mb-6 text-lg">{paragraph2}
+                    </p>
+                </div>
+            </div>
+            <div class="relative text-light w-full flex flex-col lg:flex-row items-stretch lg:items-center justify-center lg:justify-between pb-16 xl:pb-24">
+                <Image 
+                    src={image4}
+                    alt={title} 
+                    width="600"
+                    height="600"
+                    class="w-full rounded lg:w-1/2 object-cover mb-8 lg:mb-0 lg:mr-16 bg-transparent"
+                    loading="lazy"
+                />
+                <div class="flex flex-col items-start max-w-fit lg:w-1/2 mx-0">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-8">{header3}
+                    </h2>
+                    <p class="mb-6 text-lg">{paragraph3}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <Spacer />
+    <div class="w-full bg-neutrals-900 py-16">
+        <div class="container mx-auto px-6 lg:px-24">
+            <ProjectSkills {skills} />
+            <div class="text-light mt-8">
+                <h2 class="text-3xl md:text-4xl font-bold mb-8">
+                    Product Links
+                </h2>
+                {tooltip ? 
+                
+                    <TooltipButton client:load 
+                        href=""
+                        buttonText="Github Link"
+                        targetBlank={true}
+                        buttonStyle=`${buttonStyle} mb-4 inline-block px-6 py-3 rounded-lg text-sm uppercase [background-size:400%;] hover:[background-size:200%;] transition-[background-size] duration-500 cursor-not-allowed` 
+                        tooltipText={tooltip} 
+                    /> 
+                :
+                    null
+                }
+                { href ?
+                
+                    <a href={href} target="_blank" class=`${buttonStyle} mb-4 inline-block px-6 py-3 rounded-lg text-sm uppercase [background-size:400%;] hover:[background-size:200%;] transition-[background-size] duration-500`>{linkButton}</a>
+                :
+                    null
+                }
+            </div>
+        </div>
+    </div>
+</Layout>
+
+<style>
+    .stars-bg {
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        z-index: -1;
+    }
+</style>

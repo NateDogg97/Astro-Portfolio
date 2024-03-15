@@ -1,0 +1,41 @@
+---
+import { Image } from 'astro:assets';
+
+interface Props {
+    projectType: string;
+    image: ImageMetadata;
+    href: string;
+    title: string;
+    summary: string;
+    buttonStyle: string;
+}
+
+const { projectType, image, href, title, summary, buttonStyle } = Astro.props as Props
+---
+
+<div class="relative text-light w-full flex flex-col lg:flex-row items-stretch lg:items-center justify-center lg:justify-between lg:pb-8">
+    <Image 
+      src={image}
+      alt={title} 
+      width="600"
+      height="600"
+      class="w-full lg:w-1/2 object-cover mb-8 lg:mb-0 lg:mr-16 bg-transparent rounded"
+      loading="lazy"
+    />
+    <div class="flex flex-col items-start max-w-fit mx-0">
+      <span class="inline-block bg-gray-800 px-3 py-1 uppercase text-xs font-semibold rounded-full mb-4">{projectType}</span>
+      <h1 class="text-3xl md:text-4xl font-bold mb-4">{title}</h1>
+      <p class="mb-6 text-lg">{summary}</p>
+      {href ? 
+        <a href={href} target="_blank" class=`${buttonStyle} text-light button inline-block px-6 py-3 rounded-lg text-sm uppercase shadow-lg [background-size:400%;] hover:[background-size:200%;] transition-[background-size] duration-500`>See Live</a> 
+        : 
+        null 
+      }
+    </div>
+</div>
+
+<style>
+  a {
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+  }
+</style>
