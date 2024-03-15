@@ -12,7 +12,7 @@ export default defineConfig({
   vite: {
     build: {
       rollupOptions: {
-        assetFileNames: "assets/[name].[hash][extname]",
+        assetFileNames: "assets/[name][extname]",
       },
     },
   },
