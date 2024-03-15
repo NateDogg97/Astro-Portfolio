@@ -5,9 +5,9 @@ import Projects from "../components/sections/Projects.astro";
 import About from "../components/sections/About.astro";
 import Contact from "../components/sections/Contact.svelte";
 import Spacer from "../components/sections/Spacer.astro";
+export const prerender = false;
 
 const currentPagePath = Astro.url.pathname;
-
 ---
 
 <Layout title="Nathaniel's Portfolio" navStyle="" currentPagePath={currentPagePath}>
