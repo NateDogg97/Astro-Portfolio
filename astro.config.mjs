@@ -8,11 +8,4 @@ export default defineConfig({
   integrations: [tailwind(), svelte()],
   output: "server",
   adapter: vercel(),
-  // vite: {
-  //   build: {
-  //     rollupOptions: {
-  //       assetFileNames: "assets/[name][extname]",
-  //     },
-  //   },
-  // },
 });
