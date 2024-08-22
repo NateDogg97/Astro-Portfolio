@@ -10,7 +10,7 @@ const currentPagePath = Astro.url.pathname;
 
 const title = "Golf Tee Time Auto Booker";
 const projectType = "Automation";
-const href = "";
+const href = "https://github.com/NateDogg97/auto-tee-time-booker";
 const summary = "The Golf Tee Time Auto Booker is an innovative project utilizing Python, Selenium, and JavaScript to automatically book golf tee times for users. Deployed on a DigitalOcean Droplet, this bot navigates golf club websites to secure desired tee times using cronjobs for scheduling. It addresses the inconvenience of manual booking by offering a faster, automated solution, subject to golf club permissions."
 const buttonStyle = "bg-rainbow-blue text-light button";
 
@@ -20,9 +20,9 @@ const header3 = "Conclusion and Ongoing Development";
 const paragraph1 = "The bot was designed to interact with golf club websites, logging into user profiles and booking tee times automatically. It operates on a server deployment model, running at predetermined times to ensure the user can secure their desired slot. The core technologies involved are Python for scripting, Selenium for web interaction, and JavaScript for additional functionality.";
 const paragraph2 = "The primary challenge was mastering Selenium's capabilities to interact accurately with web elements, necessitating precise instructions for every potential scenario. Additionally, integrating a database to manage user preferences and crafting a user-friendly sign-up interface significantly increased the project's complexity. These challenges required thorough testing and a deep understanding of both the technologies and the booking processes of golf clubs.";
 const paragraph3 = "Despite ongoing development to address emerging edge cases, the Auto Booker Bot stands as a testament to the innovative application of programming and automation to solve real-world problems. The project has evolved with each challenge, incorporating error logging and detailed messaging to improve functionality and user experience. As development continues, it remains a promising solution for golfers seeking a more efficient way to book tee times.";
-const tooltip = "For security reasons the source code is not public.";
+// const tooltip = "For security reasons the source code is not public.";
 
 const skills: string[] = ["Python", "Selenium", "Javascript", "Digital Ocean"];
 ---
 
-<ProjectPage {image1} {image2} {image3} {image4} {currentPagePath} {title} {projectType} {href} {summary} {buttonStyle} {header1} {header2} {header3} {paragraph1} {paragraph2} {paragraph3} {skills} {tooltip} />
+<ProjectPage {image1} {image2} {image3} {image4} {currentPagePath} {title} {projectType} {href} {summary} {buttonStyle} {header1} {header2} {header3} {paragraph1} {paragraph2} {paragraph3} {skills} />
