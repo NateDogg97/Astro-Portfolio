@@ -26,9 +26,10 @@ interface Props {
     paragraph3: string;
     tooltip?: string;
     linkButton?: string;
+    loomEmbedSrc?: string;
 }
 
-const { projectType, image1, image2, image3, image4, header1, header2, header3, paragraph1, paragraph2, paragraph3, href, title, summary, buttonStyle, currentPagePath, skills, tooltip, linkButton } = Astro.props as Props;
+const { loomEmbedSrc, projectType, image1, image2, image3, image4, header1, header2, header3, paragraph1, paragraph2, paragraph3, href, title, summary, buttonStyle, currentPagePath, skills, tooltip, linkButton } = Astro.props as Props;
 ---
 
 
@@ -37,7 +38,7 @@ const { projectType, image1, image2, image3, image4, header1, header2, header3, 
     <div class="w-full bg-neutrals-900 py-8">
         <div class="h-16"></div>
         <div class="container mx-auto px-6 xl:px-24 pb-8">
-            <ProjectHero {projectType} image={image1} {href} {title} {summary} {buttonStyle}/>
+            <ProjectHero {projectType} image={image1} {href} {title} {summary} {buttonStyle} {linkButton} {loomEmbedSrc}/>
         </div>
     </div>
     <Spacer />
