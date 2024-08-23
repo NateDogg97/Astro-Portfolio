@@ -56,9 +56,10 @@ export const POST: APIRoute = async ({ request }) => {
         name: name,
         address: email,
       },
+      replyTo: email,
       to: "natmays97@gmail.com",
       subject: `New message from ${name}`,
-      text: message,
+      text: `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`,
     };
     await transporter.sendMail(mailOptions);
     // return new Response(JSON.stringify({ success: true }), {
