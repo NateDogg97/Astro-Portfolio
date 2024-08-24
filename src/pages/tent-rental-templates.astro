@@ -1,0 +1,37 @@
+---
+import ProjectPage from "../components/layouts/ProjectPage.astro";
+import image1 from "../../public/luxurytemplate1.webp";
+import image2 from "../../public/luxurytemplate2.webp";
+import image3 from "../../public/luxurytemplate3.webp";
+import image4 from "../../public/luxurytemplate4.webp";
+import type { LinkButton } from '../components/sections/ProductLinks.astro';
+export const prerender = true;
+
+const currentPagePath = Astro.url.pathname;
+
+const title = "Luxury Event Rentals Templates";
+const projectType = "Web Design";
+const linkButtons: LinkButton[] = [
+    {
+        href: 'https://defaultersluxurytemplate1.ourers.com/',
+        buttonText: 'Luxury',
+    },
+    {
+        href: 'https://defaultersluxurytemplate2.ourers.com/',
+        buttonText: 'Sheer Elegance',
+    }
+]
+const summary = "The Luxury Event Rentals Templates were my brainchild to help ERS break into the high-end event rentals market. These templates aren't just about looking good (though they do); they're about opening a whole new business avenue for us. We're talking websites and software for companies that rent out fancy tents and event gear - it's all B2B. I created two templates that let us offer something solid to this new market segment."
+const buttonStyle = "bg-dark-night";
+
+const header1 = "The Making-Of";
+const header2 = "Bumps in the Road";
+const header3 = "What It Means for Us";
+const paragraph1 = "The templates were design to support customization in text, images, meta-data, and web sections, similar to the flexibility offered by Wordpress but built on company-specific templating software. The development required close collaboration with the Graphics Design team for the layout, then bringing that vision to life using HTML, CSS, and Vinalla JavaScript. It was a challenging but rewarding process, combining creative collaboration with technical implementation to create something truly tailored to our clients' needs.";
+const paragraph2 = "The primary challenge was the solo development effort, starting from a basic layout to creating a fully functional, aesthetically pleasing template. Access to only a basic tech stack demanded thinking outside the box for state management and the development of miniature libraries to enhance functionality without compromising page speed. This process was intricate and time-consuming, demanding a high level of creativity and technical proficiency.";
+const paragraph3 = "These templates are a pretty big deal for ERS. They have helped us step into a new market and show off what we can do. Before, we were getting the occasional high end event rental company - but now we have a solid angle of attack into this market. The project showed that with some innovative thinking and solid web development, we could tap into new business opportunities. Plus, it was pretty cool to see my idea turn into something that's actually helping the company grow.";
+
+const skills: string[] = ["HTML", "CSS", "JavaScript", "Web Design", "Company Branding"];
+---
+
+<ProjectPage {linkButtons} {image1} {image2} {image3} {image4} {currentPagePath} {title} {projectType} {summary} {buttonStyle} {header1} {header2} {header3} {paragraph1} {paragraph2} {paragraph3} {skills}/>

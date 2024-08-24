@@ -46,6 +46,7 @@ const config = {
         instagram: "linear-gradient(to right, #833ab4, #fd1d1d, #fcb045);",
         atlas: "linear-gradient(to right, #feac5e, #c779d0, #4bc0c8);",
         "bloody-mary": "linear-gradient(to right, #ff512f, #dd2476);",
+        "harmonic-energy": "linear-gradient(to right, #16A085, #F4D03F);",
         "radial-highlight":
           "radial-gradient(circle at 50% 100%, rgba(46, 54, 79, 0.5) 1%, rgba(6, 9, 24, 1) 100%)",
       },

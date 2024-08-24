@@ -1,0 +1,49 @@
+---
+import TooltipButton from '../ui/TooltipButton.svelte';
+
+export interface LinkButton {
+    href: string;
+    buttonText: string;
+    isVideoLink?: boolean;
+}
+
+interface Props {
+    tooltip?: string;
+    linkButtons: LinkButton[];
+    buttonStyle: string;
+    displayTitle?: boolean;
+}
+
+const { tooltip, linkButtons, buttonStyle, displayTitle = true } = Astro.props as Props;
+---
+
+<div class="text-light mt-8">
+    {displayTitle && (
+        <h2 class="text-3xl md:text-4xl font-bold mb-8">
+            Product Links
+        </h2>
+    )}
+    <div class="flex flex-wrap gap-4">
+        {tooltip && (
+            <TooltipButton 
+                client:load
+                href=""
+                buttonText="Github Link"
+                targetBlank={true}
+                buttonStyle={`${buttonStyle} text-base inline-block px-6 py-3 rounded-lg uppercase [background-size:400%;] hover:[background-size:200%;] transition-[background-size] duration-500 cursor-not-allowed`}
+                tooltipText={tooltip}
+            />
+        )}
+        {linkButtons.map((button) => (
+            !button.isVideoLink && (
+                <a 
+                    href={button.href} 
+                    target="_blank" 
+                    class={`${buttonStyle} text-base inline-block px-6 py-3 rounded-lg [background-size:400%;] hover:[background-size:200%;] transition-[background-size] duration-500`}
+                >
+                    {button.buttonText}
+                </a>
+            )
+        ))}
+    </div>
+</div>

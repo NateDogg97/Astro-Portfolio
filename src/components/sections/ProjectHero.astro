@@ -1,18 +1,20 @@
 ---
 import { Image } from 'astro:assets';
+import ProductLinks, { type LinkButton }  from './ProductLinks.astro';
 
 interface Props {
     projectType: string;
     image: ImageMetadata;
-    href: string;
     title: string;
     summary: string;
     buttonStyle: string;
-    linkButton: string;
+    linkButtons: LinkButton[];
     loomEmbedSrc?: string;
 }
 
-const { projectType, image, href, title, summary, buttonStyle, linkButton, loomEmbedSrc } = Astro.props as Props;
+const { projectType, image, title, summary, buttonStyle, linkButtons, loomEmbedSrc } = Astro.props as Props;
+
+const isVideoLink = linkButtons.some(button => button.isVideoLink);
 ---
 
 <div class="relative text-light w-full flex flex-col lg:flex-row items-stretch lg:items-center justify-center lg:justify-between lg:pb-8">
@@ -26,35 +28,30 @@ const { projectType, image, href, title, summary, buttonStyle, linkButton, loomE
             loading="lazy"
             id="heroImage"
         />
-        {loomEmbedSrc && (
-            <>
-                <button id="playButton" class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white bg-opacity-75 rounded-full p-4 z-10">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-black">
-                        <polygon points="5 3 19 12 5 21 5 3"></polygon>
-                    </svg>
-                </button>
-                <div id="loomEmbed" class="hidden absolute left-0 w-full z-20">
-                    <div class="relative w-full h-0 pb-[56.25%]">
-                        <iframe
-                            src={loomEmbedSrc}
-                            frameborder="0"
-                            webkitallowfullscreen
-                            mozallowfullscreen
-                            allowfullscreen
-                            class="absolute top-0 left-0 w-full h-full"
-                        ></iframe>
-                    </div>
+        {isVideoLink && loomEmbedSrc && (
+            <div id="loomEmbed" class="hidden absolute left-0 w-full z-20">
+                <div class="relative w-full h-0 pb-[56.25%]">
+                    <iframe
+                        src={loomEmbedSrc}
+                        frameborder="0"
+                        webkitallowfullscreen
+                        mozallowfullscreen
+                        allowfullscreen
+                        class="absolute top-0 left-0 w-full h-full"
+                    ></iframe>
                 </div>
-            </>
+            </div>
         )}
     </div>
     <div class="flex flex-col items-start max-w-fit mx-0 lg:w-1/2">
         <span class="inline-block bg-gray-800 px-3 py-1 uppercase text-xs font-semibold rounded-full mb-4">{projectType}</span>
         <h1 class="text-3xl md:text-4xl font-bold mb-4">{title}</h1>
         <p class="mb-6 text-lg">{summary}</p>
-        {href && (
-            <a href={href} target="_blank" class={`${buttonStyle} text-light button inline-block px-6 py-3 rounded-lg text-sm uppercase shadow-lg [background-size:400%;] hover:[background-size:200%;] transition-[background-size] duration-500`}>{linkButton}</a>
-        )}
+        <ProductLinks
+            linkButtons={linkButtons}
+            buttonStyle={buttonStyle}
+            displayTitle={false}
+        />
     </div>
 </div>
 
@@ -70,13 +67,13 @@ const { projectType, image, href, title, summary, buttonStyle, linkButton, loomE
 </style>
 
 <script>
-    const playButton = document.getElementById('playButton');
+    const videoTrigger = document.querySelector('a[href="#"]');
     const loomEmbed = document.getElementById('loomEmbed');
     const heroImage = document.getElementById('heroImage');
 
-    if (playButton && loomEmbed && heroImage) {
-        playButton.addEventListener('click', () => {
-            playButton.classList.add('hidden');
+    if (videoTrigger && loomEmbed && heroImage) {
+        videoTrigger.addEventListener('click', (e) => {
+            e.preventDefault();
             loomEmbed.classList.remove('hidden');
             heroImage.style.opacity = '0';
         });
