@@ -4,13 +4,14 @@ import image1 from "../../public/instagram1.webp";
 import image2 from "../../public/instagram2.webp";
 import image3 from "../../public/instagram3.webp";
 import image4 from "../../public/instagram4.webp";
+import type { LinkButton } from "@/components/sections/ProductLinks.astro";
 export const prerender = true;
 
 const currentPagePath = Astro.url.pathname;
 
 const title = "Instagram Feed Plugin";
 const projectType = "Plugin"
-const href = "";
+
 const summary = "The Instagram Feed Plugin is a cutting-edge solution that integrates Instagram posts directly onto websites. Utilizing technologies like REST API, JavaScript, HTML, CSS, oAuth, Express.js, Node.js, and a NoSQL Database, this premium feature allows ERS users to connect their Instagram accounts to their company profiles, showcasing their social media activity seamlessly on their sites."
 const buttonStyle = "bg-instagram text-light button";
 
@@ -25,4 +26,4 @@ const tooltip = "This code base for this project belongs to ERS.";
 const skills: string[] = ["JavaScript", "Third-party APIs", "oAuth", "Express.js", "Node.js"];
 ---
 
-<ProjectPage {image1} {image2} {image3} {image4} {currentPagePath} {title} {projectType} {href} {summary} {buttonStyle} {header1} {header2} {header3} {paragraph1} {paragraph2} {paragraph3} {skills} {tooltip} />
+<ProjectPage {image1} {image2} {image3} {image4} {currentPagePath} {title} {projectType} {summary} {buttonStyle} {header1} {header2} {header3} {paragraph1} {paragraph2} {paragraph3} {skills} {tooltip} />

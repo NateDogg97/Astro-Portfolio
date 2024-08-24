@@ -35,16 +35,18 @@ const { tooltip, linkButtons, buttonStyle, displayTitle = true, displayVideoLink
                 tooltipText={tooltip}
             />
         )}
-        {linkButtons.map((button) => (
-            ((!button.isVideoLink) || (button.isVideoLink && displayVideoLink)) && (
-                <a 
-                    href={button.href} 
-                    target={button.isVideoLink ? "_self" : "_blank"}
-                    class={`${buttonStyle} inline-block px-6 py-3 rounded-lg text-sm uppercase [background-size:400%;] hover:[background-size:200%;] transition-[background-size] duration-500`}
-                >
-                    {button.buttonText}
-                </a>
-            )
-        ))}
+        {linkButtons &&
+            linkButtons.map((button) => (
+                ((!button.isVideoLink) || (button.isVideoLink && displayVideoLink)) && (
+                    <a 
+                        href={button.href} 
+                        target={button.isVideoLink ? "_self" : "_blank"}
+                        class={`${buttonStyle} inline-block px-6 py-3 rounded-lg text-base [background-size:400%;] hover:[background-size:200%;] transition-[background-size] duration-500`}
+                    >
+                        {button.buttonText}
+                    </a>
+                )
+            ))
+        }
     </div>
 </div>

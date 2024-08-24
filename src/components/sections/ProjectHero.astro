@@ -8,13 +8,13 @@ interface Props {
     title: string;
     summary: string;
     buttonStyle: string;
-    linkButtons: LinkButton[];
+    linkButtons?: LinkButton[];
     loomEmbedSrc?: string;
 }
 
 const { projectType, image, title, summary, buttonStyle, linkButtons, loomEmbedSrc } = Astro.props as Props;
 
-const isVideoLink = linkButtons.some(button => button.isVideoLink);
+const isVideoLink = linkButtons?.some(button => button.isVideoLink);
 ---
 
 <div class="relative text-light w-full flex flex-col lg:flex-row items-stretch lg:items-center justify-center lg:justify-between lg:pb-8">

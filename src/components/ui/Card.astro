@@ -6,16 +6,16 @@ interface Props {
 	skills: string;
 	href: string;
 	classList?: string;
+	target?: string;
 }
 
-const { href, title, body, classList } = Astro.props;
+const { href, target, title, body, classList } = Astro.props;
 ---
 
 <div class=`link-card ${classList}`>
-	<a href={href}>
+	<a href={href} target={target}>
 		<h2>
 			{title}
-			<!-- <span>&rarr;</span> -->
 		</h2>
 		<p>
 			{body}
