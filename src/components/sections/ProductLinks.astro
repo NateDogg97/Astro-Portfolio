@@ -12,12 +12,13 @@ interface Props {
     linkButtons: LinkButton[];
     buttonStyle: string;
     displayTitle?: boolean;
+    displayVideoLink?: boolean;
 }
 
-const { tooltip, linkButtons, buttonStyle, displayTitle = true } = Astro.props as Props;
+const { tooltip, linkButtons, buttonStyle, displayTitle = true, displayVideoLink = false } = Astro.props as Props;
 ---
 
-<div class="text-light mt-8">
+<div class=`text-light ${displayTitle ? 'mt-8' : ''}`>
     {displayTitle && (
         <h2 class="text-3xl md:text-4xl font-bold mb-8">
             Product Links
@@ -30,16 +31,16 @@ const { tooltip, linkButtons, buttonStyle, displayTitle = true } = Astro.props a
                 href=""
                 buttonText="Github Link"
                 targetBlank={true}
-                buttonStyle={`${buttonStyle} text-base inline-block px-6 py-3 rounded-lg uppercase [background-size:400%;] hover:[background-size:200%;] transition-[background-size] duration-500 cursor-not-allowed`}
+                buttonStyle={`${buttonStyle} text-base inline-block px-6 py-3 rounded-lg [background-size:400%;] hover:[background-size:200%;] transition-[background-size] duration-500 cursor-not-allowed`}
                 tooltipText={tooltip}
             />
         )}
         {linkButtons.map((button) => (
-            !button.isVideoLink && (
+            ((!button.isVideoLink) || (button.isVideoLink && displayVideoLink)) && (
                 <a 
                     href={button.href} 
-                    target="_blank" 
-                    class={`${buttonStyle} text-base inline-block px-6 py-3 rounded-lg [background-size:400%;] hover:[background-size:200%;] transition-[background-size] duration-500`}
+                    target={button.isVideoLink ? "_self" : "_blank"}
+                    class={`${buttonStyle} inline-block px-6 py-3 rounded-lg text-sm uppercase [background-size:400%;] hover:[background-size:200%;] transition-[background-size] duration-500`}
                 >
                     {button.buttonText}
                 </a>

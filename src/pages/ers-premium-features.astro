@@ -4,13 +4,20 @@ import image1 from "../../public/bundlebuilder1.webp";
 import image2 from "../../public/bundlebuilder2.webp";
 import image3 from "../../public/bundlebuilder3.webp";
 import image4 from "../../public/relatedItems4.webp";
+import type { LinkButton } from "../components/sections/ProductLinks.astro";
 export const prerender = true;
 
 const currentPagePath = Astro.url.pathname;
 
 const title = "Bundle Builder and Related Items";
 const projectType = "Ecommerce";
-const href = "#";
+const linkButtons: LinkButton[] = [
+    {
+        href: '#',
+        buttonText: 'View Demo',
+        isVideoLink: true,
+    },
+]
 const summary = 'Bundle Builder and Related Items represent significant advancements in the user interface at ERS, developed using Svelte, Astro, and sophisticated data structures, with cloud management support from Digital Ocean. Bundle Builder, the flagship feature, offers an intuitive, visually-driven interface for creating personalized item scenes and package deals. Its companion feature, Related Items, enhances item pages with "You Might Also Love" sections. Together, these premium features showcase a blend of innovation, user experience design, and technical prowess, marking a proud achievement in front-end engineering and a significant leap forward from previous iterations.'
 const buttonStyle = "bg-witching-hour";
 
@@ -21,7 +28,6 @@ const paragraph1 = "The primary goal of these features is to improve the online 
 const paragraph2 = "Developing these features presented formidable challenges, particularly in the case of Bundle Builder. Examples include implementing advanced search functionality, managing intricate data structures for real-time interactions, and perfecting drag-and-drop capabilities. This required sophisticated handling of pointer and click events, as well as mastering Svelte's reactive state management. Balancing functionality and user experience demanded not only technical skill but also a strong sense of user needs. The development of Related Items, while simpler in scope, allowed for experimentation with new technologies and showcased the ability to identify and implement targeted enhancements efficiently.";
 const paragraph3 = "These features represent a meaningful step forward in e-commerce functionality, born from a commitment to innovation and user-centric design. Bundle Builder and Related Items have not only addressed previous limitations but have also set new standards for interactive and engaging shopping experiences. As projects held in high regard, they reflect significant milestones for the company and personal growth for the developers involved. The success of these features serves as a powerful reminder of the potential that lies at the intersection of passion and technology, promising continued innovation and improvement in the e-commerce landscape.";
 const tooltip = "The code base for this project belongs to ERS.";
-const linkButton = "View Demo";
 
 const loomEmbedSrc = "https://www.loom.com/embed/ed2d8df8e9a5484db170bc1b71fabbea?sid=24f57398-ee54-4789-92d3-4be9a7732bd4"
 
@@ -29,4 +35,4 @@ const skills: string[] = ["JavaScript", "Svelte", "Astro", "Data Structures", "D
 
 ---
 
-<ProjectPage {loomEmbedSrc} {image1} {image2} {image3} {image4} {currentPagePath} {title} {projectType} {href} {summary} {buttonStyle} {header1} {header2} {header3} {paragraph1} {paragraph2} {paragraph3} {skills} {tooltip} {linkButton} />
+<ProjectPage {loomEmbedSrc} {tooltip} {image1} {image2} {image3} {image4} {currentPagePath} {title} {projectType} {summary} {buttonStyle} {header1} {header2} {header3} {paragraph1} {paragraph2} {paragraph3} {skills} {linkButtons} />

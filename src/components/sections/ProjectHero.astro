@@ -51,6 +51,7 @@ const isVideoLink = linkButtons.some(button => button.isVideoLink);
             linkButtons={linkButtons}
             buttonStyle={buttonStyle}
             displayTitle={false}
+            displayVideoLink={true}
         />
     </div>
 </div>
@@ -66,16 +67,8 @@ const isVideoLink = linkButtons.some(button => button.isVideoLink);
     }
 </style>
 
-<script>
-    const videoTrigger = document.querySelector('a[href="#"]');
-    const loomEmbed = document.getElementById('loomEmbed');
-    const heroImage = document.getElementById('heroImage');
 
-    if (videoTrigger && loomEmbed && heroImage) {
-        videoTrigger.addEventListener('click', (e) => {
-            e.preventDefault();
-            loomEmbed.classList.remove('hidden');
-            heroImage.style.opacity = '0';
-        });
-    }
+<script>
+    import { initVideoToggle } from '../../scripts/videoToggle.ts';
+    initVideoToggle();
 </script>
