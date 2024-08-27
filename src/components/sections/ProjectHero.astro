@@ -33,9 +33,6 @@ const isVideoLink = linkButtons?.some(button => button.isVideoLink);
                 <div class="relative w-full h-0 pb-[56.25%]">
                     <iframe
                         src={loomEmbedSrc}
-                        frameborder="0"
-                        webkitallowfullscreen
-                        mozallowfullscreen
                         allowfullscreen
                         class="absolute top-0 left-0 w-full h-full"
                     ></iframe>
@@ -48,8 +45,8 @@ const isVideoLink = linkButtons?.some(button => button.isVideoLink);
         <h1 class="text-3xl md:text-4xl font-bold mb-4">{title}</h1>
         <p class="mb-6 text-lg">{summary}</p>
         <ProductLinks
-            linkButtons={linkButtons}
-            buttonStyle={buttonStyle}
+            {linkButtons}
+            {buttonStyle}
             displayTitle={false}
             displayVideoLink={true}
         />
