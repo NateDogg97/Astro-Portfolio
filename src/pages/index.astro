@@ -10,7 +10,7 @@ export const prerender = true;
 const currentPagePath = Astro.url.pathname;
 ---
 
-<Layout title="Nathaniel's Portfolio" navStyle="" currentPagePath={currentPagePath}>
+<Layout title="Nathaniel's Portfolio" navStyle="" currentPagePath={currentPagePath} description="Welcome to Nathaniel Mays' portfolio. Explore innovative web development projects, including full-stack applications, e-commerce solutions, and interactive web designs.">
 	<Hero client:load/>
 	<Projects />
 	<Spacer />
