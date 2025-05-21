@@ -26,15 +26,16 @@ interface Props {
     linkButtons?: LinkButton[];
     loomEmbedSrc?: string;
     tooltip?: string;
+    description?: string;
 }
 
-const { loomEmbedSrc, projectType, image1, image2, image3, image4, header1, header2, header3, paragraph1, paragraph2, paragraph3, title, summary, buttonStyle, currentPagePath, skills, tooltip, linkButtons } = Astro.props as Props;
+const { loomEmbedSrc, projectType, image1, image2, image3, image4, header1, header2, header3, paragraph1, paragraph2, paragraph3, title, summary, buttonStyle, currentPagePath, skills, tooltip, linkButtons, description } = Astro.props as Props;
 
 // const isVideoLink: boolean = !!(loomEmbedSrc && href === '#');
 
 ---
 
-<Layout title={title} navStyle={buttonStyle} currentPagePath={currentPagePath}>
+<Layout title={title} navStyle={buttonStyle} currentPagePath={currentPagePath} description={description}>
     <div class="stars-bg fixed h-full w-full bg-[url('/stars-bg.svg')] inset"></div>
     <div class="w-full bg-neutrals-900 py-8">
         <div class="h-16"></div>

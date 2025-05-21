@@ -3,9 +3,10 @@ interface Props {
 	title: string;
 	navStyle: string;
 	currentPagePath: string;
+	description?: string;
 }
 
-const { title, navStyle, currentPagePath } = Astro.props;
+const { title, navStyle, currentPagePath, description } = Astro.props;
 import Navbar from '../components/ui/Navbar.svelte';
 import Footer from '../components/layouts/Footer.astro';
 
@@ -15,11 +16,26 @@ import Footer from '../components/layouts/Footer.astro';
 <html lang="en">
 	<head>
 		<meta charset="UTF-8" />
-		<meta name="description" content="Astro description" />
+		<meta name="description" content={description || "Nathaniel Mays' Portfolio - Showcasing web development projects and skills."} />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
+
+		<!-- Open Graph / Facebook -->
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content={Astro.url.href} />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description || "Nathaniel Mays' Portfolio - Showcasing web development projects and skills."} />
+		<meta property="og:image" content="/placeholder-og-image.jpg" />
+
+		<!-- Twitter -->
+		<meta property="twitter:card" content="summary_large_image" />
+		<meta property="twitter:url" content={Astro.url.href} />
+		<meta property="twitter:title" content={title} />
+		<meta property="twitter:description" content={description || "Nathaniel Mays' Portfolio - Showcasing web development projects and skills."} />
+		<meta property="twitter:image" content="/placeholder-og-image.jpg" />
+
 		<link
 			rel="stylesheet"
 			href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Varela+Round|Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
