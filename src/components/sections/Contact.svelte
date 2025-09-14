@@ -1,10 +1,10 @@
 <script lang="ts">
-    let name: string;
-    let email: string;
-    let message: string;
-    let responseMessage: string;
-    let requestSuccess = false;
-    let isSubmitting = false;
+    let name: string = $state('');
+    let email: string = $state('');
+    let message: string = $state('');
+    let responseMessage: string = $state('');
+    let requestSuccess = $state(false);
+    let isSubmitting = $state(false);
   
     async function handleSubmit(e: SubmitEvent) {
       e.preventDefault();
@@ -60,7 +60,7 @@
         </div>
       </div>
     <div class="flex w-full md:w-1/2 font-montserrat">
-      <form on:submit={handleSubmit} class="w-full flex flex-col space-y-4">
+      <form onsubmit={handleSubmit} class="w-full flex flex-col space-y-4">
         <input 
           bind:value={name} 
           class="bg-indigo-950 border border-gray-500 text-white text-lg p-3 rounded focus:outline-none focus:border-purple-500"

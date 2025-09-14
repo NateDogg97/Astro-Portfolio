@@ -1,12 +1,11 @@
 <script>
   import { onMount } from 'svelte';
-  import { writable } from 'svelte/store';
   
   // Initialize as true to start as not visible
-  let isNotVisible = true;
+  let isNotVisible = $state(true);
 
-  // Reactive Svelte store to manage if the transition should be applied
-  let applyTransition = writable(true);
+  // Reactive state to manage if the transition should be applied
+  let applyTransition = $state(true);
   
   onMount(() => {
     // Immediately evaluate visibility on mount
@@ -20,10 +19,10 @@
         isNotVisible = shouldBeInvisible;
         if (hasLoadedOnce) {
           // After the first visibility change, disable the transition
-          applyTransition.set(false);
+          applyTransition = false;
         }
         hasLoadedOnce = true;
-				applyTransition.set(false);
+        applyTransition = false;
       }
     };
 
@@ -41,7 +40,7 @@
     <div class="hero-container fixed inset-0">
         <div class="flex flex-col items-center justify-center w-full h-full">
             <div class={`hero-text ${isNotVisible ? 'hide' : 'show'} font-bold text-white font-montserrat text-shadow text-5xl sm:text-5xl md:text-7xl lg:text-8xl text-center`}
-								 class:no-transition="{$applyTransition ? false : true}">
+								 class:no-transition={!applyTransition}>
                 Developing New Dimensions
             </div>
         </div>
@@ -50,7 +49,7 @@
 
 <style>
     .hero-container {
-        background-image: url('/stars-bg.svg');
+        background-image: url('/icons/stars-bg.svg');
         background-position: center;
         background-repeat: no-repeat;
         background-size: cover;

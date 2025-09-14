@@ -2,24 +2,59 @@
   import { onMount } from 'svelte';
   import { Hamburger } from 'svelte-hamburgers';
 
-  export let navStyle;
-  export let currentPagePath;
+  let { navStyle, currentPagePath } = $props();
 
-  let homePage;
-  let open;
-  let navBar;
-  let isBelowBreakpoint;
-  let count = 0;
-  let isScrolled = false;
+  let homePage = $state(false);
+  let open = $state(false);
+  let navBar = $state();
+  let isBelowBreakpoint = $state(false);
+  let count = $state(0);
+  let isScrolled = $state(false);
+  let showMobilePortfolio = $state(false);
+  let showDropdown = $state(false);
   
   const links = [
-    { 'About': '/#about_me' },
-    { 'Portfolio':'/#my_projects' },
-    { 'Contact':'/#contact_me' }
-  ]
+    { text: 'About', href: '/#about_me' },
+    { text: 'Portfolio', href: '/#my_projects', isDropdown: true },
+    { text: 'Contact', href: '/#contact_me' }
+  ];
 
-  let navHeight = '46.39';
-  let maxHeight = navHeight * (links.length + 1);
+  const projectLinks = [
+    { name: 'Golf Auto Booker', href: '/golf-auto-booker' },
+    { name: 'ERS Premium Features', href: '/ers-premium-features' },
+    { name: 'Instagram Feed Plugin', href: '/instagram-feed-plugin' },
+    { name: 'Tent Rental Templates', href: '/tent-rental-templates' },
+    { name: 'Busy Bee Jumpers', href: '/busy-bee-jumpers' },
+    { name: 'Next.js Blog', href: '/nextjs-blog' }
+  ];
+
+  let navHeight = 46.39;
+  let baseLinksCount = links.length + 1; // +1 for the header
+  let totalItemsCount = $derived(showMobilePortfolio ? baseLinksCount + projectLinks.length : baseLinksCount);
+  let maxHeight = $derived(navHeight * totalItemsCount);
+
+  // Calculate position for each menu item dynamically
+  function calculateItemPosition(index, isProjectItem = false, projectIndex = 0) {
+    if (!open) return 0;
+    
+    let position = 1; // Start after header
+    
+    if (!isProjectItem) {
+      // Regular menu item
+      for (let i = 0; i < index; i++) {
+        position++;
+        // If portfolio is expanded and we've passed it, add space for project items
+        if (showMobilePortfolio && i === 1) { // Portfolio is at index 1
+          position += projectLinks.length;
+        }
+      }
+    } else {
+      // Project item - always comes after Portfolio (index 1)
+      position = 2 + projectIndex + 1; // 2 for About and Portfolio, then project index
+    }
+    
+    return position * navHeight;
+  }
 
   function checkWidthAndUpdate() {
     const currentlyBelowBreakpoint = window.innerWidth <= 640;
@@ -27,7 +62,8 @@
     if (currentlyBelowBreakpoint !== isBelowBreakpoint) {
       isBelowBreakpoint = currentlyBelowBreakpoint;
       open = false;
-      count ++;
+      showMobilePortfolio = false;
+      count++;
     }
   }
 
@@ -38,11 +74,33 @@
   function handleClickOutside(event) {
     if (!navBar.contains(event.target)) {
       open = false;
+      showMobilePortfolio = false;
     }
   }
 
   function closeNavbar() {
     open = false;
+    showDropdown = false;
+    showMobilePortfolio = false;
+  }
+
+  function toggleMobilePortfolio(e) {
+    if (isBelowBreakpoint && open) {
+      e.preventDefault();
+      showMobilePortfolio = !showMobilePortfolio;
+    }
+  }
+
+  function handleMouseEnter() {
+    if (!isBelowBreakpoint) {
+      showDropdown = true;
+    }
+  }
+
+  function handleMouseLeave() {
+    if (!isBelowBreakpoint) {
+      showDropdown = false;
+    }
   }
 
   onMount(() => {
@@ -59,17 +117,21 @@
 
     return () => {
       window.removeEventListener('scroll', updateNavbarBackground);
+      window.removeEventListener('click', handleClickOutside);
+      window.removeEventListener('resize', checkWidthAndUpdate);
     };
   });
 </script>
 
-
 {#key count}
 <nav class="navbar" bind:this={navBar}>
-  <ul class="flex flex-col sm:flex-row w-11/12 sm:w-5/6 {isScrolled || open || !homePage ? 'scrolled' : ''} {navStyle}" style={open ? `height:${maxHeight}px` : `height:${navHeight}px`}>
+  <ul class="flex flex-col sm:flex-row w-11/12 sm:w-5/6 {isScrolled || open || !homePage ? 'scrolled' : ''} {navStyle}" 
+      style={open ? `height:${maxHeight}px` : `height:${navHeight}px`}>
+    
+    <!-- Header with logo and hamburger -->
     <li class="flex justify-between items-center w-full">
       <div class="w-0 h-0 sm:hidden"></div>
-      <a href="/" on:click={closeNavbar} class="text-white font-sourceCode tracking-wider w-fit whitespace-nowrap">Nathaniel Mays</a>
+      <a href="/" onclick={closeNavbar} class="text-white font-sourceCode tracking-wider w-fit whitespace-nowrap">Nathaniel Mays</a>
       <div class='hamburger mt-[3px] sm:hidden'>
         <Hamburger 
           bind:open 
@@ -82,19 +144,57 @@
         />
       </div>
     </li>
+    
+    <!-- Main navigation items -->
     {#each links as link, linkIndex}
-      {#each Object.entries(link) as [text, href], index}
-        <li class="menu-item flex justify-center sm:bg-none w-full sm:w-auto" class:open={open} data-index={linkIndex} style={open ? `transform:translateY(${(linkIndex+1)*navHeight}px);` : null}>
-          <a href={href} on:click={closeNavbar} class="text-white font-sourceCode tracking-wider w-fit">{text}</a>
-        </li>
-      {/each}
+      <li class="menu-item flex justify-center sm:bg-none w-full sm:w-auto {link.isDropdown ? 'portfolio-link' : ''}" 
+          class:open={open} 
+          data-index={linkIndex}
+          style={open && isBelowBreakpoint ? `transform:translateY(${calculateItemPosition(linkIndex)}px);` : ''}
+          onmouseenter={link.isDropdown ? handleMouseEnter : null}
+          onmouseleave={link.isDropdown ? handleMouseLeave : null}>
+        <a href={link.href} 
+           onclick={link.isDropdown && isBelowBreakpoint ? toggleMobilePortfolio : closeNavbar} 
+           class="text-white font-sourceCode tracking-wider w-fit">
+          {link.text}
+          {#if link.isDropdown && isBelowBreakpoint && open}
+            <span class="dropdown-arrow" class:rotated={showMobilePortfolio}>▼</span>
+          {/if}
+        </a>
+        
+        <!-- Desktop dropdown menu -->
+        {#if link.isDropdown && !isBelowBreakpoint}
+          <div class="dropdown-menu {isScrolled || !homePage ? 'scrolled' : ''} {navStyle}" 
+               class:show={showDropdown}
+               role="menu"
+               tabindex="-1"
+               onmouseenter={handleMouseEnter}
+               onmouseleave={handleMouseLeave}>
+            {#each projectLinks as project}
+              <a href={project.href} onclick={closeNavbar} class="dropdown-item" role="menuitem">{project.name}</a>
+            {/each}
+          </div>
+        {/if}
+      </li>
+      
+      <!-- Mobile portfolio items - inserted right after Portfolio link -->
+      {#if link.isDropdown && showMobilePortfolio && isBelowBreakpoint && open}
+        {#each projectLinks as project, projectIndex}
+          <li class="menu-item mobile-project-item flex justify-center sm:bg-none w-full" 
+              class:open={open}
+              style={`transform:translateY(${calculateItemPosition(0, true, projectIndex)}px);`}>
+            <a href={project.href} onclick={closeNavbar} class="text-white font-sourceCode tracking-wider text-sm w-fit">
+              {project.name}
+            </a>
+          </li>
+        {/each}
+      {/if}
     {/each}
   </ul>
 </nav>
 {/key}
 
 <style>
-
   li {
     padding: 0.5em 1.2em;
     transition: background-color, box-shadow 0.3s;
@@ -113,8 +213,14 @@
 
   ul {
     position: relative;
-    transition: height 0.3s;
+    transition: height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     border-radius: 23px;
+  }
+  
+  @media (max-width: 640px) {
+    ul {
+      overflow: hidden;
+    }
   }
 
   .menu-item {
@@ -122,13 +228,22 @@
     opacity: 0;
     pointer-events: none;
     transform: translateY(0);
-    transition: transform 0.3s, opacity 0.2s;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.2s ease-in-out;
   }
 
   .menu-item.open {
-    visibility: visible;
     opacity: 1;
     pointer-events: unset;
+  }
+
+  .mobile-project-item {
+    background-color: rgba(255, 255, 255, 0.05);
+    transition-delay: 0.05s;
+  }
+
+  .mobile-project-item a {
+    font-size: 0.85rem;
+    padding-left: 1rem;
   }
 
   .scrolled {
@@ -141,6 +256,11 @@
       position: relative;
       opacity: 1;
       pointer-events: unset;
+      transform: none !important;
+    }
+    
+    .mobile-project-item {
+      display: none;
     }
   }
 
@@ -183,4 +303,60 @@
     opacity: 1;
   }
 
+  /* =============== */
+  /* Dropdown Styles */
+  
+  @media (min-width: 640px) {
+    .portfolio-link {
+      position: relative;
+    }
+  }
+
+  .dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 12px;
+    padding: 0.5rem 0;
+    min-width: 220px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s, visibility 0.3s;
+  }
+
+  .dropdown-menu.show {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .dropdown-item {
+    display: block;
+    padding: 0.5rem 1.5rem;
+    color: white;
+    font-family: 'Source Code Pro', monospace;
+    font-size: 0.9rem;
+    transition: background-color 0.2s;
+    white-space: nowrap;
+  }
+
+  .dropdown-item:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+
+  .dropdown-item::after {
+    display: none;
+  }
+
+  .dropdown-arrow {
+    display: inline-block;
+    margin-left: 0.5rem;
+    font-size: 0.7em;
+    transition: transform 0.3s;
+    vertical-align: middle;
+  }
+
+  .dropdown-arrow.rotated {
+    transform: rotate(180deg);
+  }
 </style>

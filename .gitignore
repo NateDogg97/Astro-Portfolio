@@ -4,8 +4,16 @@ dist/
 # generated types
 .astro/
 
+.vercel/
+
+.claude/
+
+.vscode/
+
 # dependencies
 node_modules/
+
+package-lock.json
 
 # logs
 npm-debug.log*

@@ -1,13 +1,9 @@
 <script>
-    export let buttonStyle;
-    export let tooltipText;
-    export let href;
-    export let buttonText;
-    export let targetBlank;
+    let { buttonStyle, tooltipText, href, buttonText, targetBlank } = $props();
 
-    let tooltipVisible = false;
-    let tooltipX = 0;
-    let tooltipY = 0;
+    let tooltipVisible = $state(false);
+    let tooltipX = $state(0);
+    let tooltipY = $state(0);
   
     function onMouseMove(event) {
       tooltipX = event.clientX;
@@ -39,9 +35,9 @@
   <a href={href || null}
      target={targetBlank ? '_blank' : null}
      class={buttonStyle}
-     on:mousemove={onMouseMove}
-     on:mouseenter={onMouseEnter}
-     on:mouseleave={onMouseLeave}>
+     onmousemove={onMouseMove}
+     onmouseenter={onMouseEnter}
+     onmouseleave={onMouseLeave}>
     {buttonText}
     {#if tooltipVisible}
       <div class="tooltip" style="top: {tooltipY-30}px; left: {tooltipX}px; opacity: 1;">
