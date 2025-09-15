@@ -22,7 +22,7 @@
   const projectLinks = [
     { name: 'Golf Auto Booker', href: '/golf-auto-booker' },
     { name: 'ERS Premium Features', href: '/ers-premium-features' },
-    { name: 'Instagram Feed Plugin', href: '/instagram-feed-plugin' },
+    { name: 'Premium Template 3', href: '/premium-template-3' },
     { name: 'Tent Rental Templates', href: '/tent-rental-templates' },
     { name: 'Busy Bee Jumpers', href: '/busy-bee-jumpers' },
     { name: 'Next.js Blog', href: '/nextjs-blog' }

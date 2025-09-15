@@ -1,0 +1,41 @@
+---
+import ProjectPage from "../components/layouts/ProjectPage.astro";
+import image1 from "../../public/premiumtemplate3/premium-template-3(1).webp";
+import image2 from "../../public/premiumtemplate3/premium-template-3(2).webp";
+import image3 from "../../public/premiumtemplate3/premium-template-3(3).webp";
+import image4 from "../../public/premiumtemplate3/premium-template-3(4).webp";
+import image5 from "../../public/premiumtemplate3/premium-template-3(5).webp";
+import type { LinkButton } from '../components/sections/ProductLinks.astro';
+export const prerender = true;
+
+const currentPagePath = Astro.url.pathname;
+
+const title = "ERS Premium Template 3";
+const projectType = "eCommerce Design/Development";
+const linkButtons: LinkButton[] = [
+    {
+        href: 'https://premium-template-3.ourers.com/',
+        buttonText: 'Template 3',
+    },
+    {
+        href: 'https://premium-template-2.ourers.com/',
+        buttonText: 'Template 2 (for comparison)',
+    }
+]
+const summary = "ERS is a business management software solution specifically marketed towards event and party rental companies. As part of the package, customers receive a website built from their choice of templates. Premium tier customers get access to exclusive premium templates - but for years, ERS only offered 2 dated options with poor performance, minimal interactivity, and low accessibility standards. Recognizing this gap was costing us premium sales, I pitched leadership on developing a new premium template that would impress customers and showcase at IAAPA 2024, the industry's largest expo. I became project lead for the first new ERS Premium Template in many years."
+const buttonStyle = "bg-dark-night";
+
+const header1 = "What is it";
+const header2 = "Why its important";
+const header3 = "Technical Achievements";
+const header4 = "Lasting Impact";
+const paragraph1 = "ERS Premium Template 3 is the flagship website template in ERS's premium tier, showcased at IAAPA 2024 as one of the company's crowning achievements that year. It drove numerous premium subscriptions at launch and remains the top choice for premium customers. As lead developer and project manager, I translated Figma designs into a hand-coded solution using vanilla HTML, CSS, and JavaScript - proving that framework-free development can still deliver exceptional results. I pushed beyond the original design specs to implement complex features like a mega-menu navbar with live search, recently viewed items tracking, and a revolutionary catalog section that transforms how users browse inventory. The template seamlessly integrates with ERS's backend while allowing extensive customization of colors, fonts, imagery, and layout properties without breaking the design.";
+const paragraph2 = "This project represents a critical business transformation for ERS. By identifying and addressing a clear gap in our premium offering, we transformed a weakness into a competitive advantage. The template doesn't just look better - it fundamentally changes how customers interact with rental inventory online. The advanced navbar with category mega-menus and real-time search reduces friction in the browsing experience, while the new catalog section on the homepage lets users explore the entire store without leaving the main page. These aren't just features; they're strategic advantages that help our customers convert more visitors into rentals. The project also demonstrated the value of developer-initiated innovation - showing that technical team members can identify and drive revenue-generating initiatives.";
+const paragraph3 = "The development pushed the boundaries of what's possible with vanilla JavaScript. The header navbar alone integrates multiple complex systems: a mega-menu displaying every category with 6 items each, localStorage-powered recently viewed items, and a real-time filtered search that updates on every keystroke. I implemented manual lazy-loading and deferred rendering for below-the-fold content to optimize page speed without framework assistance. The entire template was built with global CSS custom properties for maintainability and tested across browsers using BrowserStack to ensure consistent performance on all devices.";
+const paragraph4 = "Premium Template 3 has become the standard bearer for ERS's premium tier, consistently chosen by new premium customers and setting expectations for future development. It proved that investing in quality frontend development directly drives sales - a lesson that has influenced company priorities since. The project established new development standards including comprehensive browser testing protocols, documentation requirements, and collaboration workflows between design, development, and customer success teams. Perhaps most importantly, it validated the model of developer-led innovation, showing that technical team members can identify market opportunities and deliver solutions that meaningfully impact revenue. The techniques I developed here - particularly the complex navbar system and performance optimization strategies - have been applied across subsequent projects, raising the bar for all ERS templates.";
+
+const skills: string[] = ["HTML", "CSS", "JavaScript", "Web Design", "Company Branding"];
+const description = "Project: ERS Premium Template 3 - The flagship website template in ERS's premium tier, showcased at IAAPA 2024 as one of the company's crowning achievements.";
+---
+
+<ProjectPage {linkButtons} {image1} {image2} {image3} {image4} {currentPagePath} {title} {projectType} {summary} {buttonStyle} {header1} {header2} {header3} {paragraph1} {paragraph2} {paragraph3} {skills} {description}/>
