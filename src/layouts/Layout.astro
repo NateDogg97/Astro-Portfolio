@@ -41,6 +41,7 @@ import Footer from '../components/layouts/Footer.astro';
 			href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Varela+Round|Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
 		/>
 		<link rel="stylesheet" href="/global.css">
+		<script src={`https://www.google.com/recaptcha/enterprise.js?render=${import.meta.env.PUBLIC_RECAPTCHA_SITE_KEY}`}></script>
 	</head>
 	<body class="relative">
 		<Navbar client:load navStyle={navStyle} currentPagePath={currentPagePath}/>

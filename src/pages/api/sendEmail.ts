@@ -26,7 +26,6 @@ export const POST: APIRoute = async ({ request }) => {
     : null;
 
   if (lastEmailTime && Date.now() - lastEmailTime < 15 * 60 * 1000) {
-    // If less than 15 minutes have passed, return a 429 Too Many Requests status code
     return new Response(
       JSON.stringify({
         success: false,
@@ -43,10 +42,45 @@ export const POST: APIRoute = async ({ request }) => {
     const name = formData.get("name") as string;
     const email = formData.get("email") as string;
     const message = formData.get("message") as string;
+    const recaptchaToken = formData.get("recaptchaToken") as string;
+
     if (!name || !email || !message) {
       return new Response(
         JSON.stringify({
           message: "Missing required fields",
+        }),
+        { status: 400 }
+      );
+    }
+
+    if (!recaptchaToken) {
+      return new Response(
+        JSON.stringify({
+          success: false,
+          message: "reCAPTCHA verification failed",
+        }),
+        { status: 400 }
+      );
+    }
+
+    const recaptchaResponse = await fetch(
+      `https://www.google.com/recaptcha/api/siteverify`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: `secret=${process.env.RECAPTCHA_SECRET_KEY}&response=${recaptchaToken}`,
+      }
+    );
+
+    const recaptchaData = await recaptchaResponse.json();
+
+    if (!recaptchaData.success || recaptchaData.score < 0.5) {
+      return new Response(
+        JSON.stringify({
+          success: false,
+          message: "reCAPTCHA verification failed. Please try again.",
         }),
         { status: 400 }
       );

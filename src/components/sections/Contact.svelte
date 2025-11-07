@@ -5,31 +5,37 @@
     let responseMessage: string = $state('');
     let requestSuccess = $state(false);
     let isSubmitting = $state(false);
-  
+
     async function handleSubmit(e: SubmitEvent) {
       e.preventDefault();
       if (isSubmitting) return;
       isSubmitting = true;
 
-      const formData = new FormData(e.currentTarget as HTMLFormElement);
-
       try {
-        const response = await fetch("/api/sendEmail", {
-          method: 'POST',
-          body: formData
+        const formData = new FormData(e.currentTarget as HTMLFormElement);
+
+        await grecaptcha.enterprise.ready(async () => {
+          const token = await grecaptcha.enterprise.execute(import.meta.env.PUBLIC_RECAPTCHA_SITE_KEY, {
+            action: 'submit'
+          });
+
+          formData.append('recaptchaToken', token);
+
+          const response = await fetch("/api/sendEmail", {
+            method: 'POST',
+            body: formData
+          });
+
+          if (response.status === 429) {
+            throw new Error(`Please wait 15 minutes after sending your last message.`);
+          } else if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+
+          const data = await response.json();
+          requestSuccess = true;
+          responseMessage = data.message || "Your message was sent successfully!";
         });
-
-        if (response.status === 429) {
-          // Handle rate-limiting case
-          throw new Error(`Please wait 15 minutes after sending your last message.`);
-        } else if (!response.ok) {
-          // If the response status code is not OK, throw to catch the block
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-
-        const data = await response.json();
-        requestSuccess = true;
-        responseMessage = data.message || "Your message was sent successfully!";
       } catch (error: any) {
         console.error("Error sending message: ", error);
         requestSuccess = false;
@@ -37,7 +43,7 @@
       } finally {
         isSubmitting = false;
       }
-  
+
       name = '';
       email = '';
       message = '';
